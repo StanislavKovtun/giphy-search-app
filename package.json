@@ -5,6 +5,7 @@
 	"author": "Stanislav Kovtun",
 	"scripts": {
 		"dev": "next dev",
+		"dev4000": "next dev -p 4000",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"

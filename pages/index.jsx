@@ -18,7 +18,11 @@ export default function Home(initialData) {
 
 			<h1>Giphy Search App</h1>
 
-			<div class="giphy-search-results-grid">
+			<form>
+				<input type="text" />
+			</form>
+
+			<div className="giphy-search-results-grid">
 				{initialData.catGiphys.data.map((each, index) => {
 					return (
 						<div key={index}>
