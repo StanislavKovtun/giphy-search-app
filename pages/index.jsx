@@ -8,6 +8,20 @@ export default function Home(initialData) {
 		//console.log("### initialData:", initialData);
 	})
 
+	const handleInputs = (event) => {
+		console.log("### event:", event);
+		console.log("### value:", event.target.value);
+		console.log("### name:", event.target.name);
+	}
+
+	const search = (event) => {
+		event.preventDefault()
+		console.log("### event:", event);
+		console.log("### name:", event.target.name);
+		//console.log(formInput.searchTerm);
+		console.log(event.target.searchTerm.value);
+	}
+
 	return (
 		<div className='container'>
 			<Head>
@@ -18,8 +32,9 @@ export default function Home(initialData) {
 
 			<h1>Giphy Search App</h1>
 
-			<form>
-				<input type="text" />
+			<form onSubmit={search} type="text" required name='formInputs'>
+				<input name="searchTerm" onChange={handleInputs} type="text" />
+				<button>Search</button>
 			</form>
 
 			<div className="giphy-search-results-grid">
