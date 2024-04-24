@@ -1,25 +1,27 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
 
 export default function Home(initialData) {
+	const [formInputs, setFormInputs] = useState({})
+
 	useEffect(() => {
-		//console.log("### initialData:", initialData);
-	})
+		console.log(initialData);
+	}, [])
 
 	const handleInputs = (event) => {
-		console.log("### event:", event);
-		console.log("### value:", event.target.value);
-		console.log("### name:", event.target.name);
+		let { name, value } = event.target
+		setFormInputs({ ...formInputs, [name]: value });
+		//console.log({ ...formInputs, [name]: value });
 	}
 
 	const search = (event) => {
 		event.preventDefault()
 		console.log("### event:", event);
 		console.log("### name:", event.target.name);
-		//console.log(formInput.searchTerm);
-		console.log(event.target.searchTerm.value);
+		console.log(formInputs.searchTerm);
+		//console.log(event.target.searchTerm.value);
 	}
 
 	return (
@@ -32,7 +34,7 @@ export default function Home(initialData) {
 
 			<h1>Giphy Search App</h1>
 
-			<form onSubmit={search} type="text" required name='formInputs'>
+			<form onSubmit={search} type="text" required>
 				<input name="searchTerm" onChange={handleInputs} type="text" />
 				<button>Search</button>
 			</form>
