@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
 
 export default function Home(initialData) {
-	const [formInputs, setFormInputs] = useState({})
+	const [formInputs, setFormInputs] = useState()
 
 	useEffect(() => {
 		console.log(initialData);
@@ -12,7 +12,7 @@ export default function Home(initialData) {
 
 	const handleInputs = (event) => {
 		let { name, value } = event.target
-		setFormInputs({ ...formInputs, [name]: value });
+		setFormInputs((prev) => ({ ...prev, [name]: value }));
 		//console.log({ ...formInputs, [name]: value });
 	}
 
