@@ -14,7 +14,7 @@ export default function Home(initialData) {
 	}, [initialData]);
 
 	const handleInputs = (event) => {
-		let { name, value } = event.target
+		const { name, value } = event.target
 		setFormInputs((prev) => ({ ...prev, [name]: value }));
 	};
 
