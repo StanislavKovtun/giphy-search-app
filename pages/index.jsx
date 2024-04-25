@@ -1,27 +1,35 @@
-import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
+const INIT_SEARCH_TERM = "cats";
 
 export default function Home(initialData) {
-	const [formInputs, setFormInputs] = useState()
+	const [formInputs, setFormInputs] = useState({});
+	const [searchResults, setSearchResults] = useState([]);
+	const [searchTerm, setSearchTerm] = useState(INIT_SEARCH_TERM);
 
 	useEffect(() => {
-		console.log(initialData);
-	}, [])
+		setSearchResults(initialData.catGiphys.data);
+	}, [initialData]);
 
 	const handleInputs = (event) => {
 		let { name, value } = event.target
 		setFormInputs((prev) => ({ ...prev, [name]: value }));
-		//console.log({ ...formInputs, [name]: value });
+	};
+
+	const search = async (event) => {
+		event.preventDefault()
+		//console.log("### event:", event);
+		setSearchTerm(formInputs.searchTerm);
+		updateData();
 	}
 
-	const search = (event) => {
-		event.preventDefault()
-		console.log("### event:", event);
-		console.log("### name:", event.target.name);
-		console.log(formInputs.searchTerm);
-		//console.log(event.target.searchTerm.value);
+	const updateData = async () => {
+		const catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=${GIPHY_KEY}&limit=10`);
+		const data = await catGiphys.json();
+		//console.log("### data:", data);
+		setSearchResults(data.data);
 	}
 
 	return (
@@ -39,8 +47,10 @@ export default function Home(initialData) {
 				<button>Search</button>
 			</form>
 
+			<h1>Search results for: {searchTerm}</h1>
+
 			<div className="giphy-search-results-grid">
-				{initialData.catGiphys.data.map((each, index) => {
+				{searchResults.map((each, index) => {
 					return (
 						<div key={index}>
 							<h3>{each.title}</h3>
@@ -55,8 +65,7 @@ export default function Home(initialData) {
 }
 
 export async function getStaticProps() {
-	let catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=cats&api_key=${GIPHY_KEY}&limit=10`);
-	console.log("### catGiphys:", catGiphys);
+	let catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${INIT_SEARCH_TERM}&api_key=${GIPHY_KEY}&limit=10`);
 	catGiphys = await catGiphys.json();
 	return {
 		props: {
