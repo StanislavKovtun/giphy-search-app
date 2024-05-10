@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Footer from '@/components/Footer';
 
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
 const INIT_SEARCH_TERM = "cats";
@@ -34,43 +35,46 @@ export default function Home(initialData) {
 	}
 
 	return (
-		<div className='container'>
-			<Head>
-				<title>Create Next App</title>
-				<link rel="icon" href="/favicon.ico" />
-				<link rel="stylesheet" href="/styles.css" />
-			</Head>
+		<>
+			<div className='container'>
+				<Head>
+					<title>Create Next App</title>
+					<link rel="icon" href="/favicon.ico" />
+					<link rel="stylesheet" href="/styles.css" />
+				</Head>
 
-			<h1>Giphy Search App</h1>
+				<h1>Giphy Search App</h1>
 
-			<form onSubmit={search} type="text" required>
-				<input name="searchTerm" onChange={handleInputs} type="text" />
-				<button>Search</button>
-			</form>
+				<form onSubmit={search} type="text" required>
+					<input name="searchTerm" onChange={handleInputs} type="text" />
+					<button>Search</button>
+				</form>
 
-			<h1>Search results for: {searchTerm}</h1>
+				<h1>Search results for: {searchTerm}</h1>
 
-			<Link
-				legacyBehavior
-				href="/search/[pid]"
-				as={`/search/${searchTerm}`}>
-				<a>
-					{`http://localhost:3000/search/${searchTerm}`}
-				</a>
-			</Link>
+				<Link
+					legacyBehavior
+					href="/search/[pid]"
+					as={`/search/${searchTerm}`}>
+					<a>
+						{`http://localhost:3000/search/${searchTerm}`}
+					</a>
+				</Link>
 
-			<div className="giphy-search-results-grid">
-				{searchResults.map((each, index) => {
-					return (
-						<div key={index}>
-							<h3>{each.title}</h3>
-							<img src={each.images.original.url} alt={each.title} />
-						</div>
-					)
-				})}
+				<div className="giphy-search-results-grid">
+					{searchResults.map((each, index) => {
+						return (
+							<div key={index}>
+								<h3>{each.title}</h3>
+								<img src={each.images.original.url} alt={each.title} />
+							</div>
+						)
+					})}
+				</div>
+
 			</div>
-
-		</div>
+			<Footer />
+		</>
 	)
 }
 

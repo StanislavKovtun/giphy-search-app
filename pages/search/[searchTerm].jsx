@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Footer from '@/components/Footer';
 
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
 
@@ -29,6 +30,7 @@ export default function Search(initialData) {
 					)
 				})}
 			</div>
+			<Footer />
 		</>
 	)
 }
