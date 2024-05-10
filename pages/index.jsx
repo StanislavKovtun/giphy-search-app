@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
@@ -48,6 +49,15 @@ export default function Home(initialData) {
 			</form>
 
 			<h1>Search results for: {searchTerm}</h1>
+
+			<Link
+				legacyBehavior
+				href="/search/[pid]"
+				as={`/search/${searchTerm}`}>
+				<a>
+					{`http://localhost:3000/search/${searchTerm}`}
+				</a>
+			</Link>
 
 			<div className="giphy-search-results-grid">
 				{searchResults.map((each, index) => {
