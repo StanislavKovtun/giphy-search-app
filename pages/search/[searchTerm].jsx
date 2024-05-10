@@ -1,5 +1,6 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
 
@@ -14,6 +15,8 @@ export default function Search(initialData) {
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="stylesheet" href="/styles.css" />
 			</Head>
+			<p>Go <Link href="/">home</Link></p>
+			{/*<p><Link href="/search/cats">View some cat giphys</Link></p>*/}
 			<h1>Search results for: {router.query.searchTerm}</h1>
 
 			<div className="giphy-search-results-grid">
