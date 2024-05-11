@@ -9,10 +9,14 @@ export default function Search(initialData) {
 	const router = useRouter()
 	//console.log("### router:", router);
 	//console.log("### initalData:", initialData);
+	const content = initialData.giphys.map(item => item.title);
+	//const content = initialData.giphys.map((each, index) => each.title).join(", ").toString();
+	console.log("### content:", content);
 	return (
 		<>
 			<Head>
 				<title>Search results for: {router.query.searchTerm}</title>
+				<meta name="description" content={content}></meta>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="stylesheet" href="/styles.css" />
 			</Head>
