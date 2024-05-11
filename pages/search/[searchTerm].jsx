@@ -12,7 +12,7 @@ export default function Search(initialData) {
 	return (
 		<>
 			<Head>
-				<title>Search</title>
+				<title>Search results for: {router.query.searchTerm}</title>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="stylesheet" href="/styles.css" />
 			</Head>
