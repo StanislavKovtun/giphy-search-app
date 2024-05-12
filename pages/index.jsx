@@ -47,9 +47,13 @@ export default function Home(initialData) {
 
 				<div className="logo-container">
 					<Image
+						fill={true}
+						//width={300}
+						//height={200}
 						src="/logo.png"
 						alt="logo"
 						unsized
+					//object-fit="cover"
 					/>
 				</div>
 

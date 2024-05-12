@@ -59,7 +59,10 @@ input:focus {
 }
 
 .logo-container {
-	max-width: 500px;
+	max-width: 300px;
+	height: 120px;
 	margin: auto;
 	padding: 40px 0px;
+	/*overflow: hidden;*/
+	position: relative;
 }
