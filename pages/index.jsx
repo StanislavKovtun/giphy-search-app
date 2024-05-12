@@ -52,8 +52,10 @@ export default function Home(initialData) {
 						//height={200}
 						src="/logo.png"
 						alt="logo"
-						unsized
-					//object-fit="cover"
+						unsized={true}
+						//object-fit="cover"
+						//layout='fill'
+						objectFit='contain'
 					/>
 				</div>
 
