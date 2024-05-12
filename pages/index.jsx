@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 
@@ -44,7 +45,13 @@ export default function Home(initialData) {
 					<link rel="stylesheet" href="/styles.css" />
 				</Head>
 
-				<h1>Giphy Search App</h1>
+				<div className="logo-container">
+					<Image
+						src="/logo.png"
+						alt="logo"
+						unsized
+					/>
+				</div>
 
 				<form onSubmit={search} type="text" required>
 					<input name="searchTerm" onChange={handleInputs} type="text" />
