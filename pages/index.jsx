@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
-//import Image from "next/image";
-import Image from 'next/legacy/image';
+import Image from "next/image";
+//import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 
@@ -53,7 +53,7 @@ export default function Home(initialData) {
 						//height={200}
 						src="/logo.png"
 						alt="logo"
-						unsized={true}
+						unsized
 						objectFit='contain'
 					/>
 				</div>
