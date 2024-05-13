@@ -5,16 +5,19 @@ import Image from "next/image";
 import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 
-const GIPHY_KEY = "iydOb0v8bvpqj2cHU01dkRKjZMihahUn";
 const INIT_SEARCH_TERM = "cats";
 
 export default function Home(initialData) {
 	const [formInputs, setFormInputs] = useState({});
 	const [searchResults, setSearchResults] = useState([]);
 	const [searchTerm, setSearchTerm] = useState(INIT_SEARCH_TERM);
+	const [giphyKey, setGiphyKey] = useState('');
+
+	console.log("### initialData:", initialData);
 
 	useEffect(() => {
 		setSearchResults(initialData.catGiphys.data);
+		setGiphyKey(initialData.giphyKey);
 	}, [initialData]);
 
 	const handleInputs = (event) => {
@@ -30,7 +33,7 @@ export default function Home(initialData) {
 	}
 
 	const updateData = async () => {
-		const catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=${GIPHY_KEY}&limit=10`);
+		const catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=${giphyKey}&limit=10`);
 		const data = await catGiphys.json();
 		//console.log("### data:", data);
 		setSearchResults(data.data);
@@ -121,29 +124,16 @@ export default function Home(initialData) {
 
 export async function getServerSideProps() {
 
-	// test env vars
-	const db = {
-		host: process.env.DB_HOST,
-		username: process.env.DB_USER,
-		password: process.env.DB_PASS,
-	}
-	console.log("### db:", db);
+	const giphyKey = process.env.GIPHY_KEY;
+	console.log("### giphyKey:", giphyKey);
 
-	let catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${INIT_SEARCH_TERM}&api_key=${GIPHY_KEY}&limit=10`);
+	let catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${INIT_SEARCH_TERM}&api_key=${giphyKey}&limit=10`);
 	catGiphys = await catGiphys.json();
 	return {
 		props: {
 			catGiphys: catGiphys,
-			testProp: 'test'
+			giphyKey: giphyKey
 		}
 	}
 }
 
-//export function getStaticProps() {
-//	const db = {
-//		host: process.env.DB_HOST,
-//		username: process.env.DB_USER,
-//		password: process.env.DB_PASS,
-//	}
-//	console.log("### db:", db);
-//}
