@@ -120,6 +120,15 @@ export default function Home(initialData) {
 //If you answered yes to any of those questions, you will need to server-side render the page.
 
 export async function getServerSideProps() {
+
+	// test env vars
+	const db = {
+		host: process.env.DB_HOST,
+		username: process.env.DB_USER,
+		password: process.env.DB_PASS,
+	}
+	console.log("### db:", db);
+
 	let catGiphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${INIT_SEARCH_TERM}&api_key=${GIPHY_KEY}&limit=10`);
 	catGiphys = await catGiphys.json();
 	return {
@@ -129,3 +138,12 @@ export async function getServerSideProps() {
 		}
 	}
 }
+
+//export function getStaticProps() {
+//	const db = {
+//		host: process.env.DB_HOST,
+//		username: process.env.DB_USER,
+//		password: process.env.DB_PASS,
+//	}
+//	console.log("### db:", db);
+//}
